@@ -1,128 +1,353 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ameer Hamza | iOS Engineer</title>
   <style>
-    body{font-family:Arial,Helvetica,sans-serif;margin:0;background:#f6f7fb;color:#1a1a1a}
-    header{background:#111;color:#fff;padding:60px 20px;text-align:center}
-    header h1{margin:0;font-size:36px}
-    header p{margin-top:10px;font-size:18px;color:#cfcfcf}
-    nav{margin-top:20px}
-    nav a{color:#fff;margin:0 10px;text-decoration:none;font-weight:bold}
-    section{max-width:900px;margin:auto;padding:40px 20px}
-    h2{border-bottom:2px solid #e5e5e5;padding-bottom:10px}
-    .project{background:#fff;padding:20px;margin:20px 0;border-radius:8px;box-shadow:0 3px 8px rgba(0,0,0,0.05)}
-    .stack{font-size:14px;color:#555;margin-top:6px}
-    ul{margin-top:10px}
-    footer{text-align:center;padding:30px;background:#111;color:#ccc}
+    /* Reset & Base */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f6f7fb;
+      color: #1a1a1a;
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style-type: disc;
+      padding-left: 20px;
+    }
+
+    /* Header */
+    header {
+      background: #111;
+      color: #fff;
+      padding: 80px 20px 60px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 3rem;
+      margin-bottom: 10px;
+    }
+
+    header p {
+      font-size: 1.1rem;
+      color: #cfcfcf;
+      margin-bottom: 20px;
+    }
+
+    nav a {
+      color: #fff;
+      margin: 0 12px;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #1abc9c;
+    }
+
+    /* Sections */
+    section {
+      max-width: 1000px;
+      margin: 50px auto;
+      padding: 0 20px;
+    }
+
+    h2 {
+      font-size: 2rem;
+      border-bottom: 2px solid #e5e5e5;
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+      color: #111;
+    }
+
+    /* Project Cards */
+    .project {
+      background: #fff;
+      padding: 25px 30px;
+      margin: 25px 0;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .project:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+    }
+
+    .project h3 {
+      font-size: 1.4rem;
+      margin-bottom: 10px;
+      color: #111;
+    }
+
+    .project p {
+      margin-bottom: 10px;
+      color: #333;
+      line-height: 1.5;
+    }
+
+    .stack {
+      font-size: 0.875rem;
+      color: #555;
+      margin-top: 5px;
+      margin-bottom: 10px;
+    }
+
+    .project ul li {
+      margin-bottom: 8px;
+      color: #444;
+    }
+
+    /* Experience */
+    #experience h3 {
+      margin-top: 25px;
+      font-size: 1.2rem;
+      color: #111;
+    }
+
+    #experience p {
+      margin: 5px 0 10px;
+    }
+
+    #experience ul li {
+      margin-bottom: 8px;
+    }
+
+    /* Contact */
+    #contact p {
+      margin-bottom: 8px;
+      color: #333;
+    }
+
+    #contact a {
+      color: #1abc9c;
+      transition: color 0.3s;
+    }
+
+    #contact a:hover {
+      color: #16a085;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 30px;
+      background: #111;
+      color: #ccc;
+      font-size: 0.9rem;
+    }
+
+    /* Responsive */
+    @media (max-width:600px) {
+      header h1 {
+        font-size: 2.2rem;
+      }
+
+      header p {
+        font-size: 1rem;
+      }
+
+      nav a {
+        margin: 0 8px;
+        display: inline-block;
+        margin-bottom: 5px;
+      }
+    }
   </style>
 </head>
+
 <body>
 
-<header>
-  <h1>Ameer Hamza</h1>
-  <p>Senior iOS Engineer | Swift • Computer Vision • ARKit • OCR Systems</p>
-  <nav>
-    <a href="#projects">Projects</a>
-    <a href="#experience">Experience</a>
-    <a href="#contact">Contact</a>
-  </nav>
-</header>
+  <header>
+    <h1>Ameer Hamza</h1>
+    <p>Senior iOS Engineer | Swift • SwiftUI • Computer Vision • ARKit • OCR Systems</p>
+    <nav>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#experience">Experience</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
 
-<section id="projects">
-  <h2>Projects</h2>
+  <section id="skills"> <h2>Skills</h2> <div class="project"> <div class="stack">Swift • UIKit • SwiftUI • IOS • XCode • UI/UX • RestAPIs • AVFoundation • ARKit • SceneKit • RealityKit • MVVM • Clean Architecture • Vision • CoreML • OCR • Image Processing • REST APIs • URLSession • JSON • Alamofire • AWS Amplify • SSO • Git • Firebase • Appstore Submission • VSCode • Memory Management • Stripe • CameraKit • Multithreading • React Native • Javascript</div> </div> </section>
 
-  <div class="project">
-    <h3>PackageX Receive</h3>
-    <p>Enterprise logistics platform automating package intake and mailroom operations.</p>
-    <div class="stack">Stack: Swift, Vision, CoreML, AWS</div>
-    <ul>
-      <li>97% OCR accuracy for label recognition</li>
-      <li>10K–15K package scans processed daily</li>
-      <li>Used by organizations across 40+ countries</li>
-    </ul>
-  </div>
+  <section id="projects">
+    <h2>Projects</h2>
 
-  <div class="project">
-    <h3>Mailroom by PackageX</h3>
-    <p>AI-powered enterprise platform for managing inbound and outbound packages.</p>
-    <div class="stack">Stack: Swift, Vision, Camera Processing</div>
-    <ul>
-      <li>Automated package label scanning using Apple Vision</li>
-      <li>Real-time notifications and proof-of-pickup system</li>
-    </ul>
-  </div>
+    <div class="project">
+      <h3>PackageX Receive</h3>
+      <p>Enterprise logistics platform for mailrooms, package rooms, and pick-up/drop-oﬀ sites.</p>
+      <div class="stack">Stack: Swift, SwiftUI, UIKit, Vision, AVFoundation, AWS</div>
+      <ul>
+        <li>Developed end-to-end iOS application for mailrooms, package rooms, and pick-up/drop-oﬀ sites.</li>
+        <li>Implemented OCR-based package scanning with on-device processing for fast and accurate label recognition.
+        </li>
+        <li>Designed custom workflows for package ingestion, tracking, storage, retrieval, and self-service pickup, item
+          queues.</li>
+        <li>Integrated wireless printing, locker systems, and local handling of scanned packages.</li>
+        <li>Implemented secure authentication via AWS Cognito, Magic Link, OAuth, and SSO.</li>
+        <li>Built on-device(serverless) scanning and real-time package tracking to improve operational eﬃciency.</li>
+        <li>10K–12K package scans processed daily & used by organizations across 40+ countries</li>
+      </ul>
+    </div>
 
-  <div class="project">
-    <h3>PackageX Sight</h3>
-    <p>Computer vision analytics system for logistics site monitoring.</p>
-    <div class="stack">Stack: Swift, CoreML, Vision</div>
-    <ul>
-      <li>Real-time camera analytics pipeline</li>
-      <li>On-device ML inference for operational insights</li>
-    </ul>
-  </div>
+    <div class="project">
+      <h3>Mailroom by PackageX</h3>
+      <p>OCR-based enterprise platform for managing inbound and outbound packages.</p>
+      <div class="stack">Stack: Swift, SwiftUI, UIKit, Vision, AVFoundation, Camera Processing</div>
+      <ul>
+        <li>Built automated label scanning system using Vision and OCR by simply capturing a photo.</li>
+        <li>Implemented package-recognition workflows with backend synchronization</li>
+        <li>Implemented track of every inbound/outbound package, manage notifications.</li>
+        <li>Developed Real-time notifications and proof-of-pickup system</li>
+      </ul>
+    </div>
 
-  <div class="project">
-    <h3>Shop & Drop (Dubai Mall)</h3>
-    <p>Retail logistics system deployed at Dubai Mall.</p>
-    <div class="stack">Stack: Swift, REST APIs</div>
-    <ul>
-      <li>Customer and Runner apps delivered in 4 weeks</li>
-      <li>Integrated into Dubai Mall mobile ecosystem</li>
-    </ul>
-  </div>
+    <div class="project">
+      <h3>PackageX Sight</h3>
+      <p>AI-powered application for analytics system for logistics site monitoring.</p>
+      <div class="stack">Stack: Swift, UIKit, MLKit, Vision</div>
+      <ul>
+        <li>Built computer vision features for real-time site analytics</li>
+        <li>Implemented machine learning inference on-device for intelligent camera workflows</li>
+      </ul>
+    </div>
 
-  <div class="project">
-    <h3>Tyslin Messenger & Crypto Wallet</h3>
-    <p>Cryptocurrency wallet with AR-based experience.</p>
-    <div class="stack">Stack: Swift, ARKit, Crypto APIs</div>
-    <ul>
-      <li>Multi-coin wallet infrastructure</li>
-      <li>AR crypto hunting experience using spatial tracking</li>
-    </ul>
-  </div>
-
-</section>
-
-<section id="experience">
-  <h2>Experience</h2>
-
-  <h3>PackageX Inc (Remote)</h3>
-  <p><b>Senior Software Developer | 2022 – Present</b></p>
+<div class="project">
+  <h3>Salud</h3>
+  <p>An interactive digital gifting platform combining AR experiences with seamless peer-to-peer payments</p>
+  <div class="stack">Stack: Swift, SwiftUI, AVFoundation, Snapchat, CameraKit, Apto Payments</div>
   <ul>
-    <li>Architected enterprise iOS logistics applications used across 40+ countries.</li>
-    <li>Built real-time OCR pipeline using Vision and CoreML.</li>
-    <li>Maintained 0.1% crash rate in production apps.</li>
+    <li>Integrated Snapchat CameraKit to apply custom filters, allowing users to capture and share engaging content
+      with gifts to friend on their special occasions.</li>
+    <li>Implemented secure peer-to-peer payments using Stripe, enabling users to attach monetary gifts to shared
+      media.</li>
+    <li>Designed recipient flow to claim gifted amounts and convert them into usable digital balance.</li>
+    <li>Enabled seamless spending via Apple Pay by allowing users to transfer gifted funds into their Apple Wallet.
+    </li>
+    <li>Transformed traditional gifting into a digital-first experience by combining AR, social sharing, and fintech
+      capabilities.</li>
   </ul>
+</div>
 
-  <h3>VisionX Technologies</h3>
-  <p><b>iOS / AR Developer | 2020 – 2022</b></p>
-  <ul>
-    <li>Developed AR applications using ARKit and SceneKit.</li>
-    <li>Optimized 3D rendering pipelines improving performance by ~30%.</li>
-  </ul>
+    <div class="project">
+      <h3>Shop & Drop (Dubai Mall)</h3>
+      <p>Dubai Malls customer facilitation solution.</p>
+      <div class="stack">Stack: Swift, UIKit, REST APIs</div>
+      <ul>
+        <li>Developed Shop & Drop Customer and Runner in 4 weeks for Emaar's The Dubai Mall to facilitate customer with
+          shopping.</li>
+        <li>Integrated into Dubai Mall mobile ecosystem</li>
+      </ul>
+    </div>
 
-  <h3>Reactive Space Pvt Ltd</h3>
-  <p><b>Junior iOS Developer | 2019</b></p>
-  <ul>
-    <li>Built native UIKit applications and reusable UI components.</li>
-  </ul>
+    <div class="project">
+      <h3>Tyslin Messenger & Crypto Wallet</h3>
+      <p>Cryptocurrency wallet tokens and coins.</p>
+      <div class="stack">Stack: Swift, UIKit, Crypto APIs</div>
+      <ul>
+        <li>Integrated cryptocurrency APIs and wallet management systems</li>
+        <li>Developed multi-coin wallet features with secure transaction handling</li>
+      </ul>
+    </div>
 
-</section>
+    <div class="project">
+      <h3>Coin Hunter</h3>
+      <p>Cryptocurrency coins hunting with AR-based experience.</p>
+      <div class="stack">Stack: Swift, ARKit, SceneKit, Rest APIs</div>
+      <ul>
+        <li>Developed AR-based cryptocurrency hunting experience using ARKit</li>
+        <li>AR crypto hunting experience using spatial tracking</li>
+      </ul>
+    </div>
 
-<section id="contact">
-  <h2>Contact</h2>
-  <p>Email: rjayhamza@gmail.com</p>
-  <p>LinkedIn: https://linkedin.com</p>
-  <p>GitHub: https://github.com</p>
-</section>
+    <div class="project">
+      <h3>AR based POCs</h3>
+      <p>Engineered AR-enabled enterprise solutions and proof-of-concepts using ARKit, SceneKit, and RealityKit,
+        enabling real-time spatial interactions and immersive user experiences.</p>
+      <div class="stack">Stack: Swift, ARKit, SceneKit, RealityKit, MLKit, Rest APIs</div>
+      <ul>
+        <li><b>Home Depot:</b> Built AR-based visualization system allowing users to preview flooring and curtains in
+          real environments before purchase.</li>
+        <li><b>Staples:</b> Developed an AR measurement POC enabling accurate room dimension capture using mobile
+          devices.</li>
+        <li><b>Hanna Andersson:</b> Created real-time AR try-on experience for apparel, improving user confidence before
+          purchase.</li>
+        <li><b>Furniture AR Experience:</b> Engineered IKEA-style product placement system to visualize furniture in
+          user spaces using ARKit.</li>
+        <li><b>Retail AR Scanner:</b> Built image recognition + AR overlay system to scan products and instantly display
+          details like price, sizes, and variants.</li>
+      </ul>
+    </div>
 
-<footer>
-  <p>© 2026 Ameer Hamza</p>
-</footer>
+  </section>
+
+  <section id="experience">
+    <h2>Experience</h2>
+
+    <h3>PackageX Inc (Remote)</h3>
+    <p><b>Senior Software Developer | 2022 – Present</b></p>
+    <ul>
+      <li>Architected and developed scalable iOS applications using Swift, UIKit and MVVM powering logistics automation
+        used across 40+ countries.</li>
+      <li>Built real time OCR pipeline using Vision and CoreML achieving up to 97 percent label recognition accuracy.
+      </li>
+      <li>Designed camera workflows supporting 10K to 15K plus package scans daily.</li>
+      <li>Optimized frame processing improving low light scanning reliability.</li>
+      <li>Implemented secure authentication using AWS Cognito, OAuth, Magic Link and SSO.</li>
+      <li>Maintained about 0.1 percent crash rate across production applications.</li>
+      <li>Collaborated with cross functional teams delivering scalable enterprise mobile systems.</li>
+      <li>Applications reached more than 20K downloads.</li>
+    </ul>
+
+    <h3>VisionX Technologies</h3>
+    <p><b>iOS / AR Developer | 2020 – 2022</b></p>
+    <ul>
+      <li>Developed AR enabled iOS applications using ARKit, SceneKit and RealityKit.</li>
+      <li>Implemented real time computer vision and object detection systems.</li>
+      <li>Optimized AR rendering pipelines reducing scene latency by about 30 percent.</li>
+      <li>Built white label mobile framework for 8+ enterprise clients including Staples and McDonald's.</li>
+      <li>Developed AR applications using ARKit and SceneKit.</li>
+      <li>Optimized 3D rendering pipelines improving performance by ~30%.</li>
+    </ul>
+
+    <h3>Reactive Space Pvt Ltd</h3>
+    <p><b>Junior iOS Developer | 2019</b></p>
+    <ul>
+      <li>Developed and maintained native iOS applications using UIKit and Swift.</li>
+      <li>Built reusable UI components and core features.</li>
+      <li>Contributed to AR based mobile applications and improved performance stability.</li>
+    </ul>
+  </section>
+
+  <section id="contact">
+    <h2>Contact</h2>
+    <p>Email: <a href="mailto:rjayhamza@gmail.com">rjayhamza@gmail.com</a></p>
+    <p>LinkedIn: <a href="https://www.linkedin.com/in/imhamzah" target="_blank">https://www.linkedin.com/in/imhamzah</a>
+    </p>
+    <p>Phone: <a href="tel:+923105381076">+923105381076</a></p>
+  </section>
+
+  <footer>
+    <p>© 2026 Ameer Hamza</p>
+  </footer>
 
 </body>
+
 </html>
