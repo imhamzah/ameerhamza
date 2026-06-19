@@ -1,353 +1,1001 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Ameer Hamza | iOS Engineer</title>
   <style>
-    /* Reset & Base */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    /* ── APPLE SYSTEM TOKENS ── */
+    :root {
+      --sf: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+
+      /* iOS System Colors */
+      --blue:       #007AFF;
+      --purple:     #5856D6;
+      --teal:       #32ADE6;
+      --green:      #34C759;
+      --orange:     #FF9500;
+      --red:        #FF3B30;
+      --pink:       #FF2D55;
+      --indigo:     #5E5CE6;
+
+      /* Grays — iOS semantic */
+      --label:          #000000;
+      --label-2:        #3C3C43;
+      --label-3:        #636366;
+      --label-4:        #8E8E93;
+      --fill:           rgba(120,120,128,0.12);
+      --fill-2:         rgba(120,120,128,0.08);
+      --separator:      rgba(60,60,67,0.12);
+      --bg:             #F2F2F7;
+      --bg-grouped:     #F2F2F7;
+      --surface:        #FFFFFF;
+      --surface-2:      rgba(255,255,255,0.72);
+
+      /* Gradients */
+      --grad-hero:      linear-gradient(145deg, #1C1C1E 0%, #2C2C2E 100%);
+      --grad-blue:      linear-gradient(135deg, #007AFF 0%, #5856D6 100%);
+      --grad-teal:      linear-gradient(135deg, #32ADE6 0%, #007AFF 100%);
+      --grad-purple:    linear-gradient(135deg, #5856D6 0%, #FF2D55 100%);
+      --grad-orange:    linear-gradient(135deg, #FF9500 0%, #FF3B30 100%);
+      --grad-green:     linear-gradient(135deg, #34C759 0%, #32ADE6 100%);
+
+      /* Radius — iOS values */
+      --r-xs:   8px;
+      --r-sm:   12px;
+      --r-md:   16px;
+      --r-lg:   22px;
+      --r-xl:   28px;
+
+      /* Shadows */
+      --shadow-card: 0 2px 20px rgba(0,0,0,0.08), 0 0 0 0.5px rgba(0,0,0,0.04);
+      --shadow-float: 0 8px 32px rgba(0,0,0,0.12), 0 2px 8px rgba(0,0,0,0.06);
     }
+
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
 
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #f6f7fb;
-      color: #1a1a1a;
-      line-height: 1.6;
-    }
-
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    ul {
-      list-style-type: disc;
-      padding-left: 20px;
-    }
-
-    /* Header */
-    header {
-      background: #111;
-      color: #fff;
-      padding: 80px 20px 60px;
-      text-align: center;
-    }
-
-    header h1 {
-      font-size: 3rem;
-      margin-bottom: 10px;
-    }
-
-    header p {
-      font-size: 1.1rem;
-      color: #cfcfcf;
-      margin-bottom: 20px;
-    }
-
-    nav a {
-      color: #fff;
-      margin: 0 12px;
-      font-weight: 600;
-      transition: color 0.3s;
-    }
-
-    nav a:hover {
-      color: #1abc9c;
-    }
-
-    /* Sections */
-    section {
-      max-width: 1000px;
-      margin: 50px auto;
-      padding: 0 20px;
-    }
-
-    h2 {
-      font-size: 2rem;
-      border-bottom: 2px solid #e5e5e5;
-      padding-bottom: 10px;
-      margin-bottom: 20px;
-      color: #111;
-    }
-
-    /* Project Cards */
-    .project {
-      background: #fff;
-      padding: 25px 30px;
-      margin: 25px 0;
-      border-radius: 10px;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-
-    .project:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-    }
-
-    .project h3 {
-      font-size: 1.4rem;
-      margin-bottom: 10px;
-      color: #111;
-    }
-
-    .project p {
-      margin-bottom: 10px;
-      color: #333;
+      font-family: var(--sf);
+      background: var(--bg-grouped);
+      color: var(--label);
       line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
     }
 
-    .stack {
-      font-size: 0.875rem;
-      color: #555;
-      margin-top: 5px;
-      margin-bottom: 10px;
+    a { text-decoration:none; color:inherit; }
+    ul { list-style:none; }
+
+    /* ── NAV BAR — iOS translucent ── */
+    .navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0; z-index: 200;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      background: rgba(242,242,247,0.82);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      border-bottom: 0.5px solid var(--separator);
+      transition: background 0.3s;
+    }
+    .navbar.dark-nav {
+      background: rgba(28,28,30,0.82);
+      border-bottom-color: rgba(255,255,255,0.1);
+    }
+    .nav-brand {
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      color: var(--label);
+    }
+    .navbar.dark-nav .nav-brand { color: #fff; }
+    .nav-brand span { color: var(--blue); }
+    .nav-links { display:flex; gap:2px; }
+    .nav-links a {
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--blue);
+      padding: 6px 12px;
+      border-radius: 20px;
+      transition: background 0.18s;
+    }
+    .nav-links a:hover { background: rgba(0,122,255,0.1); }
+    .navbar.dark-nav .nav-links a:hover { background: rgba(0,122,255,0.2); }
+
+    /* ── HERO — App Store "Today" card style ── */
+    .hero {
+      min-height: 100vh;
+      background: var(--grad-hero);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 80px 28px 56px;
+      position: relative;
+      overflow: hidden;
     }
 
-    .project ul li {
-      margin-bottom: 8px;
-      color: #444;
+    /* Subtle mesh/noise texture */
+    .hero::before {
+      content:'';
+      position:absolute; inset:0;
+      background:
+        radial-gradient(ellipse 80% 60% at 80% 20%, rgba(0,122,255,0.25) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 50% at 10% 80%, rgba(88,86,214,0.2) 0%, transparent 55%),
+        radial-gradient(ellipse 40% 40% at 50% 50%, rgba(50,173,230,0.08) 0%, transparent 50%);
+      pointer-events:none;
     }
 
-    /* Experience */
-    #experience h3 {
-      margin-top: 25px;
-      font-size: 1.2rem;
-      color: #111;
+    /* Floating iOS-style icons in background */
+    .hero-orbs {
+      position:absolute; inset:0; pointer-events:none; overflow:hidden;
+    }
+    .orb {
+      position:absolute;
+      border-radius: var(--r-xl);
+      display:flex; align-items:center; justify-content:center;
+      font-size: 2rem;
+      animation: orbFloat var(--dur, 9s) ease-in-out infinite;
+      animation-delay: var(--delay, 0s);
+      opacity: 0.18;
+      filter: blur(0.5px);
+    }
+    .orb-1  { width:72px;height:72px; background:var(--grad-blue);   top:14%; left:8%;   --dur:11s; --delay:-2s; }
+    .orb-2  { width:56px;height:56px; background:var(--grad-purple); top:28%; right:10%; --dur:8s;  --delay:-5s; }
+    .orb-3  { width:64px;height:64px; background:var(--grad-orange); top:60%; left:15%;  --dur:13s; --delay:-1s; }
+    .orb-4  { width:48px;height:48px; background:var(--grad-green);  top:20%; right:30%; --dur:10s; --delay:-7s; }
+    .orb-5  { width:80px;height:80px; background:var(--grad-teal);   top:70%; right:8%;  --dur:12s; --delay:-3s; }
+
+    @keyframes orbFloat {
+      0%,100% { transform:translateY(0) rotate(0deg) scale(1); }
+      33%      { transform:translateY(-18px) rotate(8deg) scale(1.05); }
+      66%      { transform:translateY(10px) rotate(-5deg) scale(0.97); }
     }
 
-    #experience p {
-      margin: 5px 0 10px;
+    /* App Store eyebrow */
+    .hero-eyebrow {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 12px;
+      animation: fadeUp 0.7s ease both;
     }
 
-    #experience ul li {
-      margin-bottom: 8px;
+    .hero h1 {
+      font-size: clamp(2.8rem, 9vw, 5rem);
+      font-weight: 800;
+      letter-spacing: -2px;
+      line-height: 1.0;
+      color: #fff;
+      margin-bottom: 14px;
+      animation: fadeUp 0.7s 0.1s ease both;
+    }
+    .hero h1 em {
+      font-style:normal;
+      background: var(--grad-blue);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      background-clip:text;
     }
 
-    /* Contact */
-    #contact p {
-      margin-bottom: 8px;
-      color: #333;
+    .hero-tagline {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.6;
+      max-width: 400px;
+      margin-bottom: 32px;
+      font-weight: 400;
+      animation: fadeUp 0.7s 0.2s ease both;
     }
 
-    #contact a {
-      color: #1abc9c;
-      transition: color 0.3s;
+    /* iOS pill stats row */
+    .hero-pills {
+      display:flex; flex-wrap:wrap; gap:10px;
+      margin-bottom: 36px;
+      animation: fadeUp 0.7s 0.3s ease both;
+    }
+    .pill {
+      display:inline-flex; align-items:center; gap:7px;
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(10px);
+      border: 0.5px solid rgba(255,255,255,0.18);
+      padding: 8px 16px;
+      border-radius: 30px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: #fff;
+    }
+    .pill-dot {
+      width: 7px; height: 7px; border-radius:50%;
     }
 
-    #contact a:hover {
-      color: #16a085;
+    /* CTA buttons */
+    .hero-cta {
+      display:flex; gap:12px; flex-wrap:wrap;
+      animation: fadeUp 0.7s 0.4s ease both;
+    }
+    .btn-ios {
+      display:inline-flex; align-items:center; gap:8px;
+      padding: 13px 26px; border-radius: 30px;
+      font-size: 0.95rem; font-weight: 600;
+      transition: all 0.22s; cursor:pointer; border:none;
+    }
+    .btn-ios-primary {
+      background: var(--blue);
+      color: #fff;
+      box-shadow: 0 4px 16px rgba(0,122,255,0.45);
+    }
+    .btn-ios-primary:hover {
+      background: #0066DD;
+      transform: scale(1.03);
+      box-shadow: 0 8px 24px rgba(0,122,255,0.5);
+    }
+    .btn-ios-ghost {
+      background: rgba(255,255,255,0.12);
+      backdrop-filter:blur(10px);
+      border: 0.5px solid rgba(255,255,255,0.25);
+      color: #fff;
+    }
+    .btn-ios-ghost:hover {
+      background: rgba(255,255,255,0.2);
+      transform: scale(1.03);
     }
 
-    /* Footer */
-    footer {
-      text-align: center;
-      padding: 30px;
-      background: #111;
-      color: #ccc;
+    @keyframes fadeUp {
+      from { opacity:0; transform:translateY(20px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+
+    /* ── SECTION LAYOUT ── */
+    .section {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 64px 20px;
+      opacity:0; transform:translateY(24px);
+      transition: opacity 0.55s ease, transform 0.55s ease;
+    }
+    .section.visible { opacity:1; transform:translateY(0); }
+
+    /* Large Title — iOS Navigation style */
+    .large-title {
+      font-size: clamp(1.9rem, 4vw, 2.5rem);
+      font-weight: 800;
+      letter-spacing: -1px;
+      color: var(--label);
+      margin-bottom: 6px;
+    }
+    .section-sub {
       font-size: 0.9rem;
+      color: var(--label-4);
+      margin-bottom: 28px;
+      font-weight: 400;
     }
 
-    /* Responsive */
-    @media (max-width:600px) {
-      header h1 {
-        font-size: 2.2rem;
-      }
+    /* ── SKILLS — iOS grouped list style ── */
+    .skills-groups {
+      display:flex; flex-direction:column; gap:8px;
+    }
+    .skill-group {
+      background: var(--surface);
+      border-radius: var(--r-lg);
+      overflow:hidden;
+      box-shadow: var(--shadow-card);
+    }
+    .skill-group-header {
+      padding: 12px 18px 8px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--label-4);
+    }
+    .skill-chips {
+      display:flex; flex-wrap:wrap; gap:8px;
+      padding: 4px 18px 18px;
+    }
+    .skill-chip {
+      display:inline-flex; align-items:center; gap:6px;
+      padding: 7px 14px;
+      border-radius: var(--r-sm);
+      font-size: 0.83rem;
+      font-weight: 600;
+      color: #fff;
+      transition: transform 0.2s, box-shadow 0.2s;
+      cursor: default;
+    }
+    .skill-chip:hover {
+      transform: scale(1.06) translateY(-1px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.18);
+    }
 
-      header p {
-        font-size: 1rem;
-      }
+    /* ── PROJECTS — flat grouped list, iOS Settings style ── */
+    .projects-list {
+      background: var(--surface);
+      border-radius: var(--r-lg);
+      box-shadow: var(--shadow-card);
+      overflow: hidden;
+    }
+    .project-card {
+      display: block;
+      border-bottom: 0.5px solid var(--separator);
+      transition: background 0.18s;
+    }
+    .project-card:last-child { border-bottom: none; }
+    .project-card:hover { background: var(--fill-2); }
+    .project-banner { display:none; }
+    .project-body {
+      padding: 20px 22px;
+    }
+    .project-top {
+      display:flex; align-items:center;
+      gap:14px; margin-bottom:10px;
+    }
+    .project-icon-wrap {
+      width:42px; height:42px; border-radius:10px;
+      display:flex; align-items:center; justify-content:center;
+      font-size:1.2rem; flex-shrink:0;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.12);
+    }
+    .project-meta { flex:1; }
+    .project-name {
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      color: var(--label);
+      margin-bottom:1px;
+    }
+    .project-cat {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--label-4);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .project-desc {
+      font-size: 0.875rem;
+      color: var(--label-3);
+      margin-bottom: 10px;
+      line-height: 1.55;
+    }
+    .project-tags {
+      display:flex; flex-wrap:wrap; gap:6px;
+      margin-bottom: 12px;
+    }
+    .project-tag {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--blue);
+      background: rgba(0,122,255,0.1);
+      padding: 3px 10px;
+      border-radius: 20px;
+    }
+    .project-bullets {
+      display:flex; flex-direction:column; gap:5px;
+    }
+    .project-bullets li {
+      font-size: 0.82rem;
+      color: var(--label-3);
+      display:flex; gap:8px; align-items:flex-start; line-height:1.5;
+    }
+    .project-bullets li::before {
+      content:'';
+      width:5px; height:5px; border-radius:50%;
+      background: var(--blue);
+      flex-shrink:0; margin-top:6px;
+    }
 
-      nav a {
-        margin: 0 8px;
-        display: inline-block;
-        margin-bottom: 5px;
-      }
+    /* ── EXPERIENCE — iOS Settings grouped style ── */
+    .exp-list {
+      display:flex; flex-direction:column; gap:14px;
+    }
+    .exp-card {
+      background: var(--surface);
+      border-radius: var(--r-lg);
+      box-shadow: var(--shadow-card);
+      overflow:hidden;
+      transition: transform 0.25s cubic-bezier(0.34,1.3,0.64,1), box-shadow 0.25s;
+    }
+    .exp-card:hover {
+      transform: translateY(-4px) scale(1.008);
+      box-shadow: var(--shadow-float);
+    }
+    .exp-header {
+      padding: 20px 22px 16px;
+      display:flex; align-items:center; gap:16px;
+    }
+    .exp-logo {
+      width:52px; height:52px; border-radius:14px;
+      display:flex; align-items:center; justify-content:center;
+      font-size:1.5rem; flex-shrink:0;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    }
+    .exp-info { flex:1; }
+    .exp-company {
+      font-size: 1.05rem; font-weight: 700; letter-spacing:-0.3px;
+      color: var(--label); margin-bottom:2px;
+    }
+    .exp-role {
+      font-size: 0.85rem; font-weight:500;
+      color: var(--label-3);
+    }
+    .exp-badge {
+      font-size: 0.75rem; font-weight: 700;
+      padding: 5px 12px; border-radius: 20px;
+      white-space: nowrap;
+    }
+    .exp-badge.current {
+      background: rgba(52,199,89,0.12);
+      color: var(--green);
+    }
+    .exp-badge.past {
+      background: var(--fill);
+      color: var(--label-4);
+    }
+    .exp-divider {
+      height: 0.5px;
+      background: var(--separator);
+      margin: 0 22px;
+    }
+    .exp-bullets {
+      padding: 16px 22px 20px;
+      display:flex; flex-direction:column; gap:10px;
+    }
+    .exp-bullets li {
+      font-size: 0.875rem; color: var(--label-3);
+      display:flex; gap:12px; align-items:flex-start; line-height:1.55;
+    }
+    .exp-bullet-icon {
+      width:22px; height:22px; border-radius:6px;
+      background: rgba(0,122,255,0.1);
+      display:flex; align-items:center; justify-content:center;
+      flex-shrink:0; margin-top:1px;
+      font-size: 0.65rem; color: var(--blue); font-weight:700;
+    }
+
+    /* ── CONTACT ── */
+    .contact-grid {
+      display:grid; grid-template-columns:repeat(auto-fit, minmax(220px,1fr));
+      gap:14px;
+    }
+    .contact-card {
+      background: var(--surface);
+      border-radius: var(--r-lg);
+      box-shadow: var(--shadow-card);
+      padding: 22px;
+      display:flex; align-items:center; gap:16px;
+      cursor:pointer;
+      transition: transform 0.25s cubic-bezier(0.34,1.3,0.64,1), box-shadow 0.25s;
+      border:none;
+      text-align:left;
+      width:100%;
+      text-decoration:none;
+      color:inherit;
+    }
+    .contact-card:hover {
+      transform: scale(1.03) translateY(-2px);
+      box-shadow: var(--shadow-float);
+    }
+    .contact-icon-wrap {
+      width:48px; height:48px; border-radius:13px;
+      display:flex; align-items:center; justify-content:center;
+      font-size:1.3rem; flex-shrink:0;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    }
+    .contact-label {
+      font-size:0.72rem; font-weight:700; letter-spacing:0.5px;
+      text-transform:uppercase; color:var(--label-4); margin-bottom:3px;
+    }
+    .contact-value {
+      font-size:0.9rem; font-weight:600; color:var(--label);
+    }
+    /* chevron */
+    .contact-chevron {
+      margin-left:auto; color:var(--label-4); font-size:0.9rem; flex-shrink:0;
+    }
+
+    /* ── PHONE MODAL ── */
+    .modal-backdrop {
+      display:none; position:fixed; inset:0; z-index:500;
+      background: rgba(0,0,0,0.4);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      align-items:flex-end; justify-content:center;
+      padding-bottom: 12px;
+    }
+    .modal-backdrop.open { display:flex; }
+    .modal-sheet {
+      background: rgba(242,242,247,0.95);
+      backdrop-filter: saturate(180%) blur(30px);
+      -webkit-backdrop-filter: saturate(180%) blur(30px);
+      border-radius: var(--r-xl);
+      width: min(360px, calc(100vw - 24px));
+      overflow:hidden;
+      animation: sheetUp 0.38s cubic-bezier(0.34,1.56,0.64,1) both;
+    }
+    @keyframes sheetUp {
+      from { opacity:0; transform:translateY(60px) scale(0.95); }
+      to   { opacity:1; transform:translateY(0) scale(1); }
+    }
+    .modal-header {
+      text-align:center;
+      padding: 24px 24px 16px;
+      border-bottom: 0.5px solid var(--separator);
+    }
+    .modal-title {
+      font-size:0.72rem; font-weight:700; letter-spacing:0.5px;
+      text-transform:uppercase; color:var(--label-4); margin-bottom:4px;
+    }
+    .modal-phone {
+      font-size:1.1rem; font-weight:700; color:var(--label);
+    }
+    .modal-actions { padding:10px 14px; display:flex; flex-direction:column; gap:1px; }
+    .modal-btn {
+      display:flex; align-items:center; gap:14px;
+      padding: 16px 16px;
+      background: var(--surface);
+      border:none; width:100%; cursor:pointer;
+      font-family:var(--sf); font-size:1rem; font-weight:500;
+      color: var(--blue);
+      text-decoration:none;
+      transition: background 0.15s;
+    }
+    .modal-btn:first-child { border-radius: 14px 14px 0 0; }
+    .modal-btn:last-of-type { border-radius: 0 0 14px 14px; }
+    .modal-btn:only-child { border-radius: 14px; }
+    .modal-btn:hover { background: rgba(0,122,255,0.06); }
+    .modal-btn .modal-btn-icon {
+      width:36px; height:36px; border-radius:9px;
+      display:flex; align-items:center; justify-content:center; font-size:1.1rem;
+    }
+    .modal-btn-text { flex:1; text-align:left; }
+    .modal-btn-title { font-size:0.95rem; font-weight:600; display:block; }
+    .modal-btn-sub { font-size:0.78rem; color:var(--label-4); display:block; margin-top:1px; }
+    .modal-separator { height:0.5px; background:var(--separator); margin:0; }
+    .modal-cancel {
+      margin: 10px 14px 0;
+      background: var(--surface);
+      border:none; width:calc(100% - 28px);
+      padding:17px; border-radius:14px;
+      font-family:var(--sf); font-size:1rem; font-weight:700;
+      color: var(--blue); cursor:pointer;
+      transition: background 0.15s;
+    }
+    .modal-cancel:hover { background:var(--fill); }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align:center;
+      padding:28px 20px 40px;
+      font-size:0.82rem;
+      color:var(--label-4);
+      border-top:0.5px solid var(--separator);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:600px){
+      .hero { padding:72px 20px 48px; }
+      .hero h1 { font-size:2.6rem; letter-spacing:-1.5px; }
+      .nav-links { display:none; }
+
+    }
+    @media(prefers-reduced-motion:reduce){
+      *,*::before,*::after { animation-duration:0.01ms!important; transition-duration:0.01ms!important; }
     }
   </style>
 </head>
-
 <body>
 
-  <header>
-    <h1>Ameer Hamza</h1>
-    <p>Senior iOS Engineer | Swift • SwiftUI • Computer Vision • ARKit • OCR Systems</p>
-    <nav>
-      <a href="#skills">Skills</a>
-      <a href="#projects">Projects</a>
-      <a href="#experience">Experience</a>
-      <a href="#contact">Contact</a>
-    </nav>
-  </header>
+<!-- NAVBAR -->
+<nav class="navbar dark-nav" id="navbar">
+  <div class="nav-brand">Ameer<span>.</span></div>
+  <div class="nav-links">
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#experience">Experience</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
 
-  <section id="skills"> <h2>Skills</h2> <div class="project"> <div class="stack">Swift • UIKit • SwiftUI • IOS • XCode • UI/UX • RestAPIs • AVFoundation • ARKit • SceneKit • RealityKit • MVVM • Clean Architecture • Vision • CoreML • OCR • Image Processing • REST APIs • URLSession • JSON • Alamofire • AWS Amplify • SSO • Git • Firebase • Appstore Submission • VSCode • Memory Management • Stripe • CameraKit • Multithreading • React Native • Javascript</div> </div> </section>
+<!-- HERO -->
+<header class="hero" id="hero">
+  <div class="hero-orbs">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="orb orb-4"></div>
+    <div class="orb orb-5"></div>
+  </div>
 
-  <section id="projects">
-    <h2>Projects</h2>
+  <div class="hero-eyebrow">
+    <svg width="14" height="17" viewBox="0 0 814 1000" fill="rgba(255,255,255,0.5)" style="display:inline-block;vertical-align:middle;margin-right:6px;margin-bottom:2px" xmlns="http://www.w3.org/2000/svg"><path d="M788.1 340.9c-5.8 4.5-108.2 62.2-108.2 190.5 0 148.4 130.3 200.9 134.2 202.2-.6 3.2-20.7 71.9-68.7 141.9-42.8 61.6-87.5 123.1-155.5 123.1s-85.5-39.5-164-39.5c-76 0-103.7 40.8-165.9 40.8s-105-57.8-155.5-127.4C46 790.7 0 663 0 541.8c0-207.8 135.4-317.9 268.7-317.9 100.5 0 184 66.8 245.8 66.8 59.2 0 152-71 265.1-71 43.6 0 156 4 232.5 76.4zm-187.2-171.4c56.5-67.1 97-161.3 97-255.5 0-13.4-1.3-26.7-3.9-37.9-92.8 3.2-202.6 62.2-268.7 140.3-51.6 60.3-100.5 154.6-100.5 250.2 0 14.1 2.6 27.4 3.2 31.9 5.8 1.3 15.4 2.6 24.9 2.6 83.5 0 188.8-56.5 248-131.6z"/></svg>
+    Senior iOS Engineer · Portfolio
+  </div>
 
-    <div class="project">
-      <h3>PackageX Receive</h3>
-      <p>Enterprise logistics platform for mailrooms, package rooms, and pick-up/drop-oﬀ sites.</p>
-      <div class="stack">Stack: Swift, SwiftUI, UIKit, Vision, AVFoundation, AWS</div>
-      <ul>
-        <li>Developed end-to-end iOS application for mailrooms, package rooms, and pick-up/drop-oﬀ sites.</li>
-        <li>Implemented OCR-based package scanning with on-device processing for fast and accurate label recognition.
-        </li>
-        <li>Designed custom workflows for package ingestion, tracking, storage, retrieval, and self-service pickup, item
-          queues.</li>
-        <li>Integrated wireless printing, locker systems, and local handling of scanned packages.</li>
-        <li>Implemented secure authentication via AWS Cognito, Magic Link, OAuth, and SSO.</li>
-        <li>Built on-device(serverless) scanning and real-time package tracking to improve operational eﬃciency.</li>
-        <li>10K–12K package scans processed daily & used by organizations across 40+ countries</li>
-      </ul>
+  <h1>Ameer<br><em>Hamza</em></h1>
+
+  <p class="hero-tagline">Senior iOS Engineer crafting enterprise-grade mobile experiences with Swift, SwiftUI, Computer Vision, ARKit & OCR Systems.</p>
+
+  <div class="hero-pills">
+    <div class="pill"><div class="pill-dot" style="background:var(--green)"></div>Available for Opportunities</div>
+    <div class="pill">7+ Years Experience</div>
+    <div class="pill">40+ Countries Served</div>
+    <div class="pill">97% OCR Accuracy</div>
+    <div class="pill">15K+ Daily Scans</div>
+  </div>
+
+  <div class="hero-cta">
+    <a href="#projects" class="btn-ios btn-ios-primary">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+      View Projects
+    </a>
+    <a href="#contact" class="btn-ios btn-ios-ghost">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      Get in Touch
+    </a>
+  </div>
+</header>
+
+<!-- SKILLS -->
+<section class="section" id="skills">
+  <h2 class="large-title">Skills</h2>
+  <p class="section-sub">Technologies & frameworks I work with daily</p>
+  <div class="skills-groups" id="skills-container"></div>
+</section>
+
+<!-- PROJECTS -->
+<section class="section" id="projects">
+  <h2 class="large-title">Projects</h2>
+  <p class="section-sub">Apps & platforms I've shipped</p>
+  <div class="projects-list" id="projects-container"></div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="section" id="experience">
+  <h2 class="large-title">Experience</h2>
+  <p class="section-sub">Where I've built my craft</p>
+  <div class="exp-list" id="exp-container"></div>
+</section>
+
+<!-- CONTACT -->
+<section class="section" id="contact">
+  <h2 class="large-title">Get in Touch</h2>
+  <p class="section-sub">Let's build something great together</p>
+  <div class="contact-grid" id="contact-container"></div>
+</section>
+
+<footer>© 2026 Ameer Hamza · Built with Swift-inspired precision</footer>
+
+<!-- PHONE MODAL (iOS Action Sheet style) -->
+<div class="modal-backdrop" id="phone-modal" onclick="closeModal(event)">
+  <div class="modal-sheet" onclick="event.stopPropagation()">
+    <div class="modal-header">
+      <div class="modal-title">Contact</div>
+      <div class="modal-phone">+92 310 538 1076</div>
     </div>
-
-    <div class="project">
-      <h3>Mailroom by PackageX</h3>
-      <p>OCR-based enterprise platform for managing inbound and outbound packages.</p>
-      <div class="stack">Stack: Swift, SwiftUI, UIKit, Vision, AVFoundation, Camera Processing</div>
-      <ul>
-        <li>Built automated label scanning system using Vision and OCR by simply capturing a photo.</li>
-        <li>Implemented package-recognition workflows with backend synchronization</li>
-        <li>Implemented track of every inbound/outbound package, manage notifications.</li>
-        <li>Developed Real-time notifications and proof-of-pickup system</li>
-      </ul>
+    <div class="modal-actions">
+      <a href="https://wa.me/923105381076" target="_blank" class="modal-btn">
+        <div class="modal-btn-icon" style="background:rgba(37,211,102,0.15)">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        </div>
+        <div class="modal-btn-text">
+          <span class="modal-btn-title">WhatsApp</span>
+          <span class="modal-btn-sub">Open in WhatsApp</span>
+        </div>
+      </a>
+      <div class="modal-separator"></div>
+      <a href="tel:+923105381076" class="modal-btn">
+        <div class="modal-btn-icon" style="background:rgba(0,122,255,0.12)">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#007AFF" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11.5a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .84h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.63a16 16 0 006.29 6.29l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+        </div>
+        <div class="modal-btn-text">
+          <span class="modal-btn-title">Call Directly</span>
+          <span class="modal-btn-sub">Open Phone</span>
+        </div>
+      </a>
     </div>
-
-    <div class="project">
-      <h3>PackageX Sight</h3>
-      <p>AI-powered application for analytics system for logistics site monitoring.</p>
-      <div class="stack">Stack: Swift, UIKit, MLKit, Vision</div>
-      <ul>
-        <li>Built computer vision features for real-time site analytics</li>
-        <li>Implemented machine learning inference on-device for intelligent camera workflows</li>
-      </ul>
-    </div>
-
-<div class="project">
-  <h3>Salud</h3>
-  <p>An interactive digital gifting platform combining AR experiences with seamless peer-to-peer payments</p>
-  <div class="stack">Stack: Swift, SwiftUI, AVFoundation, Snapchat, CameraKit, Apto Payments</div>
-  <ul>
-    <li>Integrated Snapchat CameraKit to apply custom filters, allowing users to capture and share engaging content
-      with gifts to friend on their special occasions.</li>
-    <li>Implemented secure peer-to-peer payments using Stripe, enabling users to attach monetary gifts to shared
-      media.</li>
-    <li>Designed recipient flow to claim gifted amounts and convert them into usable digital balance.</li>
-    <li>Enabled seamless spending via Apple Pay by allowing users to transfer gifted funds into their Apple Wallet.
-    </li>
-    <li>Transformed traditional gifting into a digital-first experience by combining AR, social sharing, and fintech
-      capabilities.</li>
-  </ul>
+    <button class="modal-cancel" onclick="closeModal()">Cancel</button>
+    <div style="height:8px"></div>
+  </div>
 </div>
 
-    <div class="project">
-      <h3>Shop & Drop (Dubai Mall)</h3>
-      <p>Dubai Malls customer facilitation solution.</p>
-      <div class="stack">Stack: Swift, UIKit, REST APIs</div>
-      <ul>
-        <li>Developed Shop & Drop Customer and Runner in 4 weeks for Emaar's The Dubai Mall to facilitate customer with
-          shopping.</li>
-        <li>Integrated into Dubai Mall mobile ecosystem</li>
+<script>
+  // ─── DATA ───────────────────────────────────────────────
+
+  const skillGroups = [
+    {
+      label: "Core iOS",
+      color: "#007AFF",
+      grad: "linear-gradient(135deg,#007AFF,#5856D6)",
+      skills: ["Swift","UIKit","SwiftUI","Xcode","iOS","AVFoundation","Memory Management","Multithreading"]
+    },
+    {
+      label: "AR & Computer Vision",
+      color: "#5856D6",
+      grad: "linear-gradient(135deg,#5856D6,#FF2D55)",
+      skills: ["ARKit","SceneKit","RealityKit","Vision","CoreML","OCR","Image Processing","MLKit"]
+    },
+    {
+      label: "Architecture & Patterns",
+      color: "#32ADE6",
+      grad: "linear-gradient(135deg,#32ADE6,#007AFF)",
+      skills: ["MVVM","Clean Architecture","Coordinator","Factory","REST APIs","URLSession","JSON","Alamofire"]
+    },
+    {
+      label: "Cloud & Auth",
+      color: "#FF9500",
+      grad: "linear-gradient(135deg,#FF9500,#FF3B30)",
+      skills: ["AWS Amplify","Firebase","SSO","OAuth","Stripe","CameraKit"]
+    },
+    {
+      label: "Tools & Cross-Platform",
+      color: "#34C759",
+      grad: "linear-gradient(135deg,#34C759,#32ADE6)",
+      skills: ["Git","App Store Submission","React Native","JavaScript","VSCode","UI/UX"]
+    }
+  ];
+
+  const projects = [
+    {
+      icon:"📦", grad:"linear-gradient(135deg,#007AFF,#5856D6)", cat:"Enterprise Logistics",
+      name:"PackageX Receive",
+      desc:"Enterprise logistics platform for mailrooms, package rooms, and pick-up/drop-off sites.",
+      tags:["Swift","SwiftUI","UIKit","Vision","AVFoundation","AWS"],
+      bullets:[
+        "End-to-end iOS application powering mailrooms and package rooms globally.",
+        "OCR-based package scanning with on-device processing for fast label recognition.",
+        "Custom workflows for ingestion, tracking, retrieval, and self-service pickup.",
+        "Secure auth via AWS Cognito, Magic Link, OAuth, and SSO.",
+        "10K–12K package scans processed daily across 40+ countries."
+      ]
+    },
+    {
+      icon:"🏢", grad:"linear-gradient(135deg,#32ADE6,#007AFF)", cat:"Enterprise Logistics",
+      name:"Mailroom by PackageX",
+      desc:"OCR-based enterprise platform for managing inbound and outbound packages.",
+      tags:["Swift","SwiftUI","UIKit","Vision","AVFoundation"],
+      bullets:[
+        "Automated label scanning via Vision and OCR from a single photo capture.",
+        "Package-recognition workflows with real-time backend synchronization.",
+        "Real-time notifications and proof-of-pickup system."
+      ]
+    },
+    {
+      icon:"🤖", grad:"linear-gradient(135deg,#5E5CE6,#32ADE6)", cat:"AI & Machine Learning",
+      name:"PackageX Sight",
+      desc:"AI-powered analytics system for logistics site monitoring.",
+      tags:["Swift","UIKit","MLKit","Vision","CoreML"],
+      bullets:[
+        "Computer vision features for real-time site analytics.",
+        "On-device ML inference for intelligent camera workflows."
+      ]
+    },
+    {
+      icon:"🎁", grad:"linear-gradient(135deg,#FF2D55,#FF9500)", cat:"Fintech & AR",
+      name:"Salud",
+      desc:"Interactive digital gifting platform combining AR experiences with peer-to-peer payments.",
+      tags:["Swift","SwiftUI","Snapchat CameraKit","Stripe","Apto Payments"],
+      bullets:[
+        "Snapchat CameraKit integration for custom AR filters on gifted media.",
+        "Secure peer-to-peer payments with Stripe and Apple Pay.",
+        "Recipient flow to claim and convert gifted amounts to digital balance."
+      ]
+    },
+    {
+      icon:"🛍️", grad:"linear-gradient(135deg,#FF9500,#FF3B30)", cat:"Retail",
+      name:"Shop & Drop (Dubai Mall)",
+      desc:"Customer facilitation solution for Emaar's The Dubai Mall.",
+      tags:["Swift","UIKit","REST APIs"],
+      bullets:[
+        "Customer and Runner apps delivered in just 4 weeks.",
+        "Fully integrated into the Dubai Mall mobile ecosystem."
+      ]
+    },
+    {
+      icon:"💎", grad:"linear-gradient(135deg,#5856D6,#007AFF)", cat:"Crypto & Messaging",
+      name:"Tyslin Messenger & Crypto Wallet",
+      desc:"Cryptocurrency wallet for tokens and coins with messaging.",
+      tags:["Swift","UIKit","Crypto APIs"],
+      bullets:[
+        "Integrated cryptocurrency APIs and wallet management systems.",
+        "Multi-coin wallet with secure transaction handling."
+      ]
+    },
+    {
+      icon:"🪙", grad:"linear-gradient(135deg,#FF9500,#5856D6)", cat:"AR & Crypto",
+      name:"Coin Hunter",
+      desc:"AR-based cryptocurrency hunting experience using spatial tracking.",
+      tags:["Swift","ARKit","SceneKit","REST APIs"],
+      bullets:[
+        "Immersive AR crypto hunting experience using ARKit.",
+        "Spatial tracking for real-world virtual coin placement."
+      ]
+    },
+    {
+      icon:"🔮", grad:"linear-gradient(135deg,#34C759,#5856D6)", cat:"Enterprise AR",
+      name:"AR based POCs",
+      desc:"Enterprise AR solutions for Home Depot, Staples, IKEA-style furniture, Hanna Andersson & more.",
+      tags:["Swift","ARKit","SceneKit","RealityKit","MLKit"],
+      bullets:[
+        "Home Depot: AR flooring and curtain preview in real environments.",
+        "Staples: AR measurement POC for accurate room dimensions.",
+        "Hanna Andersson: Real-time AR try-on experience for apparel.",
+        "Furniture AR: IKEA-style product placement using ARKit.",
+        "Retail Scanner: Image recognition + AR overlay for product details."
+      ]
+    }
+  ];
+
+  const experience = [
+    {
+      icon:"🏛️", grad:"linear-gradient(135deg,#007AFF,#5856D6)",
+      company:"Systems Limited", role:"Senior iOS Engineer",
+      period:"2026 – Present", current:true,
+      bullets:[
+        "Joined as Senior iOS Engineer, contributing to enterprise-grade mobile solutions.",
+      ]
+    },
+    {
+      icon:"📦", grad:"linear-gradient(135deg,#32ADE6,#007AFF)",
+      company:"PackageX Inc", role:"Senior Software Developer · Remote",
+      period:"2022 – 2025", current:false,
+      bullets:[
+        "Architected scalable iOS apps using Swift, UIKit, and MVVM for logistics automation in 40+ countries.",
+        "Built real-time OCR pipeline using Vision and CoreML achieving up to 97% label recognition accuracy.",
+        "Designed camera workflows supporting 10K–15K+ package scans daily.",
+        "Optimized frame processing for improved low-light scanning reliability.",
+        "Maintained ~0.1% crash rate across production applications.",
+        "Applications reached 20K+ downloads."
+      ]
+    },
+    {
+      icon:"🔮", grad:"linear-gradient(135deg,#5856D6,#FF2D55)",
+      company:"VisionX Technologies", role:"iOS / AR Developer",
+      period:"2020 – 2022", current:false,
+      bullets:[
+        "Developed AR-enabled iOS applications using ARKit, SceneKit, and RealityKit.",
+        "Implemented real-time computer vision and object detection systems.",
+        "Optimized AR rendering pipelines reducing scene latency by ~30%.",
+        "Built white-label mobile framework for 8+ enterprise clients including Staples and McDonald's."
+      ]
+    },
+    {
+      icon:"📱", grad:"linear-gradient(135deg,#34C759,#32ADE6)",
+      company:"Reactive Space Pvt Ltd", role:"Junior iOS Developer",
+      period:"2019", current:false,
+      bullets:[
+        "Developed and maintained native iOS applications using UIKit and Swift.",
+        "Built reusable UI components and core features.",
+        "Contributed to AR-based mobile applications and improved performance stability."
+      ]
+    }
+  ];
+
+  // ─── RENDER SKILLS ───────────────────────────────────────
+  const skillsContainer = document.getElementById('skills-container');
+  skillGroups.forEach(group => {
+    const el = document.createElement('div');
+    el.className = 'skill-group';
+    el.innerHTML = `
+      <div class="skill-group-header">${group.label}</div>
+      <div class="skill-chips">
+        ${group.skills.map(s => `
+          <span class="skill-chip" style="background:${group.grad}">${s}</span>
+        `).join('')}
+      </div>
+    `;
+    skillsContainer.appendChild(el);
+  });
+
+  // ─── RENDER PROJECTS ─────────────────────────────────────
+  const projContainer = document.getElementById('projects-container');
+  projects.forEach(p => {
+    const el = document.createElement('div');
+    el.className = 'project-card';
+    el.innerHTML = `
+      <div class="project-banner" style="background:${p.grad}"></div>
+      <div class="project-body">
+        <div class="project-top">
+          <div class="project-icon-wrap" style="background:${p.grad}">${p.icon}</div>
+          <div class="project-meta">
+            <div class="project-name">${p.name}</div>
+            <div class="project-cat">${p.cat}</div>
+          </div>
+        </div>
+        <p class="project-desc">${p.desc}</p>
+        <div class="project-tags">${p.tags.map(t=>`<span class="project-tag">${t}</span>`).join('')}</div>
+        <ul class="project-bullets">${p.bullets.map(b=>`<li>${b}</li>`).join('')}</ul>
+      </div>
+    `;
+    projContainer.appendChild(el);
+  });
+
+  // ─── RENDER EXPERIENCE ───────────────────────────────────
+  const expContainer = document.getElementById('exp-container');
+  experience.forEach(e => {
+    const el = document.createElement('div');
+    el.className = 'exp-card';
+    el.innerHTML = `
+      <div class="exp-header">
+        <div class="exp-logo" style="background:${e.grad}">${e.icon}</div>
+        <div class="exp-info">
+          <div class="exp-company">${e.company}</div>
+          <div class="exp-role">${e.role}</div>
+        </div>
+        <div class="exp-badge ${e.current ? 'current' : 'past'}">${e.period}</div>
+      </div>
+      <div class="exp-divider"></div>
+      <ul class="exp-bullets">
+        ${e.bullets.map((b,i)=>`
+          <li>
+            <div class="exp-bullet-icon">${String(i+1).padStart(2,'0')}</div>
+            <span>${b}</span>
+          </li>
+        `).join('')}
       </ul>
-    </div>
+    `;
+    expContainer.appendChild(el);
+  });
 
-    <div class="project">
-      <h3>Tyslin Messenger & Crypto Wallet</h3>
-      <p>Cryptocurrency wallet tokens and coins.</p>
-      <div class="stack">Stack: Swift, UIKit, Crypto APIs</div>
-      <ul>
-        <li>Integrated cryptocurrency APIs and wallet management systems</li>
-        <li>Developed multi-coin wallet features with secure transaction handling</li>
-      </ul>
-    </div>
+  // ─── RENDER CONTACT ──────────────────────────────────────
+  const contactData = [
+    { icon:"✉️", grad:"linear-gradient(135deg,#007AFF,#5856D6)", label:"Email", value:"rjayhamza@gmail.com", href:"mailto:rjayhamza@gmail.com", modal:false },
+    { icon:"💼", grad:"linear-gradient(135deg,#5856D6,#FF2D55)", label:"LinkedIn", value:"linkedin.com/in/imhamzah", href:"https://www.linkedin.com/in/imhamzah", modal:false },
+    { icon:"📱", grad:"linear-gradient(135deg,#34C759,#32ADE6)", label:"Phone", value:"+92 310 538 1076", href:null, modal:true }
+  ];
+  const contactContainer = document.getElementById('contact-container');
+  contactData.forEach(c => {
+    let el;
+    if (c.modal) {
+      el = document.createElement('button');
+      el.className = 'contact-card';
+      el.onclick = openModal;
+    } else {
+      el = document.createElement('a');
+      el.className = 'contact-card';
+      el.href = c.href;
+      if (c.href.startsWith('http')) el.target = '_blank';
+    }
+    el.innerHTML = `
+      <div class="contact-icon-wrap" style="background:${c.grad}">${c.icon}</div>
+      <div>
+        <div class="contact-label">${c.label}</div>
+        <div class="contact-value">${c.value}</div>
+      </div>
+      <div class="contact-chevron">›</div>
+    `;
+    contactContainer.appendChild(el);
+  });
 
-    <div class="project">
-      <h3>Coin Hunter</h3>
-      <p>Cryptocurrency coins hunting with AR-based experience.</p>
-      <div class="stack">Stack: Swift, ARKit, SceneKit, Rest APIs</div>
-      <ul>
-        <li>Developed AR-based cryptocurrency hunting experience using ARKit</li>
-        <li>AR crypto hunting experience using spatial tracking</li>
-      </ul>
-    </div>
+  // ─── MODAL ───────────────────────────────────────────────
+  function openModal() {
+    document.getElementById('phone-modal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal(e) {
+    if (e && e.target !== document.getElementById('phone-modal') && e.type !== 'click') return;
+    document.getElementById('phone-modal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') { document.getElementById('phone-modal').classList.remove('open'); document.body.style.overflow=''; }});
 
-    <div class="project">
-      <h3>AR based POCs</h3>
-      <p>Engineered AR-enabled enterprise solutions and proof-of-concepts using ARKit, SceneKit, and RealityKit,
-        enabling real-time spatial interactions and immersive user experiences.</p>
-      <div class="stack">Stack: Swift, ARKit, SceneKit, RealityKit, MLKit, Rest APIs</div>
-      <ul>
-        <li><b>Home Depot:</b> Built AR-based visualization system allowing users to preview flooring and curtains in
-          real environments before purchase.</li>
-        <li><b>Staples:</b> Developed an AR measurement POC enabling accurate room dimension capture using mobile
-          devices.</li>
-        <li><b>Hanna Andersson:</b> Created real-time AR try-on experience for apparel, improving user confidence before
-          purchase.</li>
-        <li><b>Furniture AR Experience:</b> Engineered IKEA-style product placement system to visualize furniture in
-          user spaces using ARKit.</li>
-        <li><b>Retail AR Scanner:</b> Built image recognition + AR overlay system to scan products and instantly display
-          details like price, sizes, and variants.</li>
-      </ul>
-    </div>
+  // ─── SCROLL ANIMATIONS ───────────────────────────────────
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); }});
+  }, { threshold: 0.06 });
+  document.querySelectorAll('.section').forEach(s => observer.observe(s));
 
-  </section>
-
-  <section id="experience">
-    <h2>Experience</h2>
-
-    <h3>PackageX Inc (Remote)</h3>
-    <p><b>Senior Software Developer | 2022 – Present</b></p>
-    <ul>
-      <li>Architected and developed scalable iOS applications using Swift, UIKit and MVVM powering logistics automation
-        used across 40+ countries.</li>
-      <li>Built real time OCR pipeline using Vision and CoreML achieving up to 97 percent label recognition accuracy.
-      </li>
-      <li>Designed camera workflows supporting 10K to 15K plus package scans daily.</li>
-      <li>Optimized frame processing improving low light scanning reliability.</li>
-      <li>Implemented secure authentication using AWS Cognito, OAuth, Magic Link and SSO.</li>
-      <li>Maintained about 0.1 percent crash rate across production applications.</li>
-      <li>Collaborated with cross functional teams delivering scalable enterprise mobile systems.</li>
-      <li>Applications reached more than 20K downloads.</li>
-    </ul>
-
-    <h3>VisionX Technologies</h3>
-    <p><b>iOS / AR Developer | 2020 – 2022</b></p>
-    <ul>
-      <li>Developed AR enabled iOS applications using ARKit, SceneKit and RealityKit.</li>
-      <li>Implemented real time computer vision and object detection systems.</li>
-      <li>Optimized AR rendering pipelines reducing scene latency by about 30 percent.</li>
-      <li>Built white label mobile framework for 8+ enterprise clients including Staples and McDonald's.</li>
-      <li>Developed AR applications using ARKit and SceneKit.</li>
-      <li>Optimized 3D rendering pipelines improving performance by ~30%.</li>
-    </ul>
-
-    <h3>Reactive Space Pvt Ltd</h3>
-    <p><b>Junior iOS Developer | 2019</b></p>
-    <ul>
-      <li>Developed and maintained native iOS applications using UIKit and Swift.</li>
-      <li>Built reusable UI components and core features.</li>
-      <li>Contributed to AR based mobile applications and improved performance stability.</li>
-    </ul>
-  </section>
-
-  <section id="contact">
-    <h2>Contact</h2>
-    <p>Email: <a href="mailto:rjayhamza@gmail.com">rjayhamza@gmail.com</a></p>
-    <p>LinkedIn: <a href="https://www.linkedin.com/in/imhamzah" target="_blank">https://www.linkedin.com/in/imhamzah</a>
-    </p>
-    <p>Phone: <a href="tel:+923105381076">+923105381076</a></p>
-  </section>
-
-  <footer>
-    <p>© 2026 Ameer Hamza</p>
-  </footer>
-
+  // ─── NAVBAR: switch light when past hero ─────────────────
+  const navEl = document.getElementById('navbar');
+  const heroEl = document.getElementById('hero');
+  const navObs = new IntersectionObserver(([entry]) => {
+    navEl.classList.toggle('dark-nav', entry.isIntersecting);
+  }, { threshold: 0.1 });
+  navObs.observe(heroEl);
+</script>
 </body>
-
 </html>
